@@ -25,7 +25,7 @@ $ npm install humpback-module --save
 ### 2. run generator
 
 ```sh
-$ sails generate humback-module MODULE_NAME
+$ sails generate humpback-module MODULE_NAME
 ```
 
 ### Development
