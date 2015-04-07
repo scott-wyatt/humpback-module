@@ -89,7 +89,9 @@ module.exports = {
     
     './assets/app/mvc/:filename': { folder: {} },
     './assets/app/mvc/:filename/templates': { folder: {} },
+    './assets/app/mvc/:filename/components': { folder: {} },
     './assets/app/mvc/:filename/templates/index.tpl.html': {template: 'index.tpl.template.js'},
+    './assets/app/mvc/:filename/components/index.js': {template: 'components.index.template.js'},
     './assets/app/mvc/:filename/_controllers.js': {template: '_controllers.template.js'},
     './assets/app/mvc/:filename/_dependencies.js': {template: '_dependencies.template.js'},
     './assets/app/mvc/:filename/_models.js': {template: '_models.template.js'},

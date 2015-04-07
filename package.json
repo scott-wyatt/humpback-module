@@ -1,6 +1,6 @@
 {
   "name": "humpback-module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "sails generate humback modules",
   "main": "Generator.js",
   "scripts": {
