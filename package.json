@@ -1,5 +1,5 @@
 {
-  "name": "humback-module",
+  "name": "humpback-module",
   "version": "0.0.1",
   "description": "sails generate humback modules",
   "main": "Generator.js",
@@ -8,6 +8,10 @@
   },
   "author": "scottBwyatt",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scott-wyatt/humback-module.git"
+  },
   "dependencies": {
     "lodash": ">=2.4.x",
     "merge-defaults": "^0.2.1"
