@@ -1,0 +1,25 @@
+{
+  "name": "humback-module",
+  "version": "0.0.1",
+  "description": "sails generate humback modules",
+  "main": "Generator.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "scottBwyatt",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": ">=2.4.x",
+    "merge-defaults": "^0.2.1"
+  },
+  "devDependencies": {
+    "sails-generate": "*",
+    "reportback": "*",
+    "fs-extra": "*"
+  },
+  "sailsGenerator": {
+    "type": "humback-module",
+    "behavior": "generates `humpback modules`",
+    "sailsVersion": "~0.10.0"
+  }
+}
