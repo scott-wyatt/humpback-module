@@ -6,7 +6,7 @@
 The latest stable version in npm is always a safe bet.
 
 ```sh
-$ npm install sails-stripe
+$ npm install humback-module
 ```
 
 [![NPM](https://nodei.co/npm/sails-stripe.png?downloads=true&stars=true)](https://nodei.co/npm/sails-stripe/)

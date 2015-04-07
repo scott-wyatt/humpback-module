@@ -1,4 +1,4 @@
-# Contributing to sails-stripe
+# Contributing to humpback-module
 
 
 ## Opening Issues
