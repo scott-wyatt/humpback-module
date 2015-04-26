@@ -3,7 +3,7 @@
 * Loads <%= filename %> Module
 * 
 **/
-angular.module('<%= filename %>', [
+angular.module('humpback.mvc.<%= filename %>', [
 	'<%= filename %>.controllers',
 	'<%= filename %>.states',
 	'<%= filename %>.dependencies',
