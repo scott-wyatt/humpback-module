@@ -6,6 +6,15 @@ var util = require('util');
 var _ = require('lodash');
 _.defaults = require('merge-defaults');
 
+Array.prototype.stateUcase = function(){
+  for (i=0; i<this.length; i++){
+    this[i] = this[i].charAt(0).toUpperCase() + this[i].substring(1);
+  }
+  return this;
+};
+
+
+
 /**
  * humpback-module
  *
@@ -34,9 +43,8 @@ module.exports = {
     // scope.args are the raw command line arguments.
     //
     // e.g. if someone runs:
-    // $ sails generate humpback-module user find create update
+    // $ sails generate humpback-view user find create update
     // then `scope.args` would be `['user', 'find', 'create', 'update']`
-    
     if (!scope.args[0]) {
       return cb( new Error('Please provide a name for this humpback-module.') );
     }
@@ -48,25 +56,37 @@ module.exports = {
     //
     // And someone ran this generator from `/Users/dbowie/sailsStuff`,
     // then `/Users/dbowie/sailsStuff/Foobar.md` would be created.
-    
     if (!scope.rootPath) {
       return cb( INVALID_SCOPE_VARIABLE('rootPath') );
     }
+
 
     // Attach defaults
     _.defaults(scope, {
       createdAt: new Date()
     });
 
-    // Decide the output filename for use in targets below:
-    scope.filename = scope.args[0];
+    var args = scope.args[0].toLowerCase().split('/');
+    var foldernameArgs = args.slice(0);
+    var statenameArgs = args.slice(0);
+    var stateArgs = args.slice(0);
 
+    var filenameOverride = typeof scope.args[1] !== 'undefined' ? scope.args[1].toLowerCase() : null;
+    // Decide the output filename for use in targets below:
+    //scope.statename = args[args.length - 1];   
+    //scope.controllername = args[args.length - 1].charAt(0).toUpperCase() + args[args.length - 1].slice(1);
+
+    scope.filename = filenameOverride ? filenameOverride : (args.length > 1 ? args[args.length - 1] : 'index');
+    scope.foldername = foldernameArgs.length > 1 ? foldernameArgs.slice(0, foldernameArgs.length - 1).join('/') + '/' : args + '/';
+    scope.statename = statenameArgs.length > 1 ?  statenameArgs.slice(0, statenameArgs.length - 1).stateUcase().join('') : statenameArgs.stateUcase().join('');
+    scope.state = stateArgs.length > 1 ?  stateArgs.slice(0, stateArgs.length - 1).join('.') : statenameArgs.join('.');
     // Add other stuff to the scope for use in our templates:
-    scope.whatIsThis = 'humpback-module created at '+scope.createdAt;
+    scope.whatIsThis = 'A humpback-module created at '+scope.createdAt;
 
     // When finished, we trigger a callback with no error
     // to begin generating files/folders as specified by
     // the `targets` below.
+
     cb();
   },
 
@@ -87,16 +107,10 @@ module.exports = {
     // entire scope available to it (uses underscore/JST/ejs syntax).
     // Then the file is copied into the specified destination (on the left).
     
-    './assets/app/mvc/:filename': { folder: {} },
-    './assets/app/mvc/:filename/templates': { folder: {} },
-    './assets/app/mvc/:filename/components': { folder: {} },
-    './assets/app/mvc/:filename/templates/index.tpl.html': {template: 'index.tpl.template.js'},
-    './assets/app/mvc/:filename/components/index.js': {template: 'components.index.template.js'},
-    './assets/app/mvc/:filename/_controllers.js': {template: '_controllers.template.js'},
-    './assets/app/mvc/:filename/_dependencies.js': {template: '_dependencies.template.js'},
-    './assets/app/mvc/:filename/_models.js': {template: '_models.template.js'},
-    './assets/app/mvc/:filename/_states.js': {template: '_states.template.js'},
-    './assets/app/mvc/:filename/index.js': {template: 'index.template.js'}
+    './assets/app/views/:foldername:statename.controllers.js': { template: 'controllers.template.js'  },
+    './assets/app/views/:foldername:statename.states.js': { template: 'states.template.js'  },
+
+    './views/:foldername:filename.ejs': { template: 'ejs.template.js' }
 
   },
 
